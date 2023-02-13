@@ -6,7 +6,8 @@ import cursor from './cursor.png'
 import settings from './settings.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
-import {useRef,useState} from "react";
+import {useEffect, useRef,useState} from "react";
+import useWebSocket from 'react-use-websocket';
 
 const Drawingpage =() => {
 const canvasRef=useRef(null);
@@ -16,6 +17,7 @@ const[lastx,setLastx]=useState(0);
 const[lasty,setLasty]=useState(0);
 const[pen,setpen]=useState(false);
 const [rub,setRub]=useState(false);
+
 
 
 const startDrawing = (e) => {
@@ -43,7 +45,7 @@ const Draw=e=>{
     const ctx = canvas.getContext("2d");
     const { offsetX, offsetY } = e.nativeEvent;
 
-    ctx.lineWidth = erasing ? 40 : 2;
+    ctx.lineWidth = erasing ? 40 : 20;
     ctx.strokeStyle = erasing ? "white" : "black";
 
     ctx.beginPath();
@@ -56,6 +58,18 @@ const Draw=e=>{
     setLasty(offsetY);
 
 };
+useEffect(()=>{
+    const WS_URL = 'wss://synkit-backend-production.up.railway.app/ws/1234';
+    const Connect=()=>{
+    useWebSocket(WS_URL, {
+        onOpen: () => {
+          console.log('WebSocket connection established.');
+        }
+      });
+}
+
+},[]);
+
     return (
         <div className="h-screen w-screen bg-[#A7A7A7]  flex justify-center items-center flex-wrap">
 
