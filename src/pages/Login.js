@@ -17,9 +17,9 @@ function LoginPage() {
     return (
         <div className="h-screen w-screen bg-black"  >
             <div className="flex justify-center items-center absolute top-20 left-20">
-                <ClerkProvider publishableKey='pk_test_cG9wdWxhci1qYXliaXJkLTU3LmNsZXJrLmFjY291bnRzLmRldiQ' settings={clerkSettings}>
+                {/* <ClerkProvider publishableKey='pk_test_cG9wdWxhci1qYXliaXJkLTU3LmNsZXJrLmFjY291bnRzLmRldiQ'> */}
             <SignIn signUpUrl="/signup" afterSignInUrl="/dashboard" />
-                </ClerkProvider>
+                {/* </ClerkProvider> */}
             </div>
 
 

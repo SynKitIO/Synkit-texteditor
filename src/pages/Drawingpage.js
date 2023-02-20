@@ -10,10 +10,11 @@ import {useEffect, useRef, useState} from "react";
 import { TwitterPicker } from 'react-color';
 import "../App.css";
 import {ChevronRightIcon} from "@heroicons/react/24/solid";
-
+import { useAuth } from '@clerk/clerk-react'
 
 
 const Drawingpage =() => {
+    const {userId, getToken} = useAuth();
     const canvasRef=useRef(null);
     const[isDrawing,setIsDrawing]=useState(false);
     const[erasing,setErasing]=useState(false);
@@ -36,6 +37,10 @@ const Drawingpage =() => {
 
 
     useEffect(() => {
+        async function tToken() {
+            console.log(await getToken(), userId);
+        }
+        tToken();
         const data={
             'x':0,
             'y':0,
