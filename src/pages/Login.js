@@ -12,7 +12,7 @@ const clerkSettings = {
 function LoginPage() {
 
     return (
-        <div className="flex h-screen w-screen justify-center items-center bg-white">
+        <div className="flex h-screen w-screen justify-center items-center bg-contain bg-no-repeat bg-center bg-[url('../public/paint-bg.svg')] bg-white">
             <div className="flex justify-center items-center">
             <SignIn signUpUrl="/signup" afterSignInUrl="/dashboard" />
             </div>

@@ -13,15 +13,11 @@ export default function App() {
   return (
 
       <ClerkProvider
-        publishableKey={"pk_test_cG9wdWxhci1qYXliaXJkLTU3LmNsZXJrLmFjY291bnRzLmRldiQ"}
-        navigate={(to) => navigate(to)}
-      >
+        publishableKey={"pk_test_cG9wdWxhci1qYXliaXJkLTU3LmNsZXJrLmFjY291bnRzLmRldiQ"}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Drawingpage />} />
-          {/*<Route path="*" element={<NoPage />} />*/}
-
         </Routes>
       </ClerkProvider>
 
