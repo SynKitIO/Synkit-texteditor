@@ -14,7 +14,7 @@ import { useAuth } from '@clerk/clerk-react'
 
 
 const Drawingpage =() => {
-    const {userId, getToken} = useAuth();
+    const {userId, sessionId, getToken} = useAuth();
     const canvasRef=useRef(null);
     const[isDrawing,setIsDrawing]=useState(false);
     const[erasing,setErasing]=useState(false);
@@ -34,12 +34,26 @@ const Drawingpage =() => {
     const[radius,setRadius]=useState(0);
     const[snapshot,setSnapshot]=useState(null);
     const[flag,setFlag]=useState('false');
-
+    async function tToken() {
+        console.log(await getToken(), userId, sessionId);
+        const token = await getToken();
+        const options={
+            method:'GET',
+            headers:{'content-type':'application/json',
+            Authorization: token,
+        },
+        }
+        const resp=await fetch(`https://95d5-2401-4900-615c-3581-885d-f3e3-8408-3573.ap.ngrok.io/auth/verify?session_id=${sessionId}`,options);
+        if (resp.status==200)
+        {
+            console.log("kittida");
+        }
+        else{
+            console.log("moonji");
+        }
+    }
 
     useEffect(() => {
-        async function tToken() {
-            console.log(await getToken(), userId);
-        }
         tToken();
         const data={
             'x':0,
@@ -168,7 +182,7 @@ const Drawingpage =() => {
 
 
         }
-        setSnapshot(ctx.mageData(0, 0, canvas.width, canvas.height));
+        setSnapshot(ctx.imageData(0, 0, canvas.width, canvas.height));
     };
     const startErasing=()=>{
         setErasing(true);
